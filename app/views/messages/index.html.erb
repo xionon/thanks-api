@@ -1,0 +1,9 @@
+<% @messages.each do |message| %>
+<dl>
+  <dt>To</dt>
+  <dd><%= message.recipient %></dd>
+
+  <dt>Body</dt>
+  <dd><%= message.body %></dd>
+</dl>
+<% end %>
