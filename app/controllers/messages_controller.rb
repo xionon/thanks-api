@@ -4,17 +4,23 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @messages }
+      format.json
     end
   end
 
   def create
-    Message.create!(message_params)
+    warden.authenticate!
 
-    head :ok
+    @message = Message.create!(message_params)
+
+    respond_to do |format|
+      format.html { redirect_to messages_path }
+      format.json { head :ok }
+    end
   end
 
   private
+
   def message_params
     params.require(:message).permit(:recipient, :body)
   end
