@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get "login" => "sessions#new"
+  get "signup" => "users#new"
+  get "logout" => "sessions#destroy"
+
   resources :messages, only: [:index, :create]
   resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create, :destroy]
 
   root 'messages#index'
 

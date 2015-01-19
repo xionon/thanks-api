@@ -1,14 +1,15 @@
 require 'test_helper'
+require 'minitest/mock'
 
 class UsersControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  describe "new" do
+    before do
+      @request.env['warden'] = Minitest::Mock.new.expect(:user, nil)
+    end
 
-  test "should get create" do
-    get :create
-    assert_response :success
+    it "responds to GET" do
+      get :new
+      assert_response :success
+    end
   end
-
 end
