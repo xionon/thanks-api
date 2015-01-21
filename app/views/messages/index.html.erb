@@ -1,9 +1,5 @@
-<% @messages.each do |message| %>
-<dl>
-  <dt>To</dt>
-  <dd><%= message.recipient %></dd>
-
-  <dt>Body</dt>
-  <dd><%= message.body %></dd>
-</dl>
-<% end %>
+<%= react_component(
+  'MessageList',
+  render(template: 'messages/index.json.jbuilder'),
+  prerender: true
+) %>

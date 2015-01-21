@@ -4,4 +4,6 @@ unless Rails.env.production?
     :password => "password",
     :password_confirmation => "password"
   )
+
+  20.times { |i| Message.create(:recipient => "User #{i}", :body => "Thanks for ##{i}") }
 end
