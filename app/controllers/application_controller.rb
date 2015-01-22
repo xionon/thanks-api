@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def warden
     request.env['warden']
   end
+
+  def authenticate_user
+    warden.authenticate!
+  end
 end

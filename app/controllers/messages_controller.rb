@@ -1,16 +1,18 @@
 class MessagesController < ApplicationController
+  before_filter :authenticate_user
+
   def index
     @messages = Message.order(:created_at => :desc).limit(20).all
 
-    respond_to do |format|
-      format.html
-      format.json
+    if stale? last_modified: @messages.minimum(:updated_at)
+      respond_to do |format|
+        format.html
+        format.json
+      end
     end
   end
 
   def create
-    warden.authenticate!
-
     @message = Message.create!(message_params)
 
     respond_to do |format|

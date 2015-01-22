@@ -1,6 +1,11 @@
 class SessionsController < ApplicationController
   def new
     flash.now.alert = warden.message if warden.message.present?
+
+    respond_to do |format|
+      format.html
+      format.json { render :nothing => true, :status => :unauthorized }
+    end
   end
 
   def create
